@@ -11,10 +11,12 @@ RUN apt-get update && apt-get install -y \
 # Copy the SDRconnect installer to the container
 COPY SDRconnect_linux-arm64_83273bcd8_1.run /opt/sdrconnect.run
 
-# Make the installer executable and extract SDRconnect to /opt/sdrconnect
+# Make the installer executable and run the full silent install
 RUN chmod +x /opt/sdrconnect.run && \
-    /opt/sdrconnect.run --noexec --target /opt/sdrconnect && \
-    chmod +x /opt/sdrconnect/sdrconnect && \
+    /opt/sdrconnect.run --quiet --accept --target /opt/sdrconnect
+
+# Make the SDRconnect binary executable and symlink it
+RUN chmod +x /opt/sdrconnect/sdrconnect && \
     ln -s /opt/sdrconnect/sdrconnect /usr/local/bin/sdrconnect
 
 # Set working directory
