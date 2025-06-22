@@ -45,8 +45,10 @@ docker build -t sdrconnect_arm64 .
 ## 🚀 Run Example
 
 ```bash
-docker run --rm \
+docker run -d \
+  --name sdrconnect \
   --device /dev/bus/usb \
   -p 50000:50000 \
+  --restart unless-stopped \
   sdrconnect_server
 ```
