@@ -47,6 +47,6 @@ docker build -t sdrconnect_arm64 .
 ```bash
 docker run --rm \
   --device /dev/bus/usb \
-  -p 5555:5555 \
+  -p 50000:50000 \
   sdrconnect_server
 ```
