@@ -36,12 +36,17 @@ This is a Dockerized version of **SDRConnect** for ARM64 systems (e.g., Raspberr
 2. Place the installer file at the root of this repository (next to the Dockerfile)  
 3. Build the Docker image:
 
+```bash
 docker build -t sdrconnect_arm64 .
+```
 
 ---
 
 ## 🚀 Run Example
 
-docker run --rm --device /dev/bus/usb \
+```bash
+docker run --rm \
+  --device /dev/bus/usb \
   -p 5555:5555 \
-  sdrconnect_arm64
+  sdrconnect_server
+```
