@@ -8,7 +8,7 @@ RUN apt-get update && apt-get install -y \
     rm -rf /var/lib/apt/lists/*
 
 # Copy the SDRconnect installer .run file to /opt
-COPY SDRconnect_linux-arm64_83273bcd8_1.run /opt/installer.run
+COPY SDRconnect_linux-arm64_83273bcd8.run /opt/installer.run #change file name based on latest download
 
 # Make the installer executable and extract SDRconnect files
 RUN chmod +x /opt/installer.run && \
