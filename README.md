@@ -1,4 +1,4 @@
-# sdrconnect-docker
+# sdrconnect-server-docker
 
 A minimal Docker container that runs **SDRConnect** from SDRPlay.
 
@@ -24,11 +24,11 @@ docker build --ssh default -t sdrconnect-server .
 ## 🚀 Run the container
 ```bash
 docker run -d \
-  --name sdrconnect \
+  --name sdrconnect-server-container \
   --device /dev/bus/usb \
   -p 50000:50000 \
   --restart unless-stopped \
-  sdrconnect
+  sdrconnect-server
 ```
 
 ---
