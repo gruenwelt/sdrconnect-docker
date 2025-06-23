@@ -1,6 +1,6 @@
 # sdrconnect-server-docker
 
-A minimal Docker container that runs **SDRConnect** from SDRPlay.
+A Docker container that runs **SDRConnect** from SDRPlay.
 
 Tested to run on Orange Pi Zero 2W and RSP1a and remote connected from a Mac with SDRconnect installed. Should be able to run on other arm64 single-board computers like Raspberry Pi or other linux computers.
 
