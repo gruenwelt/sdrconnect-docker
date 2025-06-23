@@ -10,7 +10,7 @@ Tested to run on Orange Pi Zero 2W and RSP1a and remote connected from a Mac wit
 
 - A Linux system
 - A SDRPlay device such as RSP1a
-- Another device with SDRconnect installed for remote connection such as Mac or PC.
+- Another device such as Mac or PC with a SDRconnect software installed for remote connection.
 - The sdrconnect installer file `sdrconnect*.run` downloaded from https://sdrplay.com/download and placed in the same folder as the Dockerfile
 
 ---
