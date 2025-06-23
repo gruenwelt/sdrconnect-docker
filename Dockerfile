@@ -1,4 +1,4 @@
-# Use Ubuntu 22.04 base image for ARM64
+# Use Ubuntu 22.04 base image
 FROM ubuntu:22.04
 
 # Install dependencies needed for SDRconnect
@@ -8,7 +8,7 @@ RUN apt-get update && apt-get install -y \
     rm -rf /var/lib/apt/lists/*
 
 # Copy the SDRconnect installer .run file to /opt // #change file name based on latest download
-COPY SDRconnect_linux-arm64_83273bcd8.run /opt/installer.run
+COPY SDRconnect*.run /opt/installer.run
 
 # Make the installer executable and extract SDRconnect files
 RUN chmod +x /opt/installer.run && \
