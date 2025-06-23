@@ -1,1 +1,11 @@
-SDRconnect_linux-arm64_83273bcd8*.run
+# Ignore the SDRconnect*.run file downloaded by user
+SDRconnect*.run
+
+# Ignore macOS Finder metadata
+.DS_Store
+
+# Ignore Vim swap files
+*.swp
+
+# Ignore logs if any created locally
+*.log
