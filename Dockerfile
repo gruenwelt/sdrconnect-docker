@@ -1,30 +1,26 @@
-# Use Ubuntu 22.04 base image
-FROM ubuntu:22.04
+# Stage 1: Build and unpack SDRconnect
+FROM ubuntu:22.04 AS builder
 
-# Install dependencies needed for SDRconnect
 RUN apt-get update && apt-get install -y \
-    libusb-1.0-0 libasound2 libuuid1 libicu70 libglib2.0-0 libxcb1 libx11-6 libxext6 libxrender1 \
-    libxrandr2 libxfixes3 libxi6 libxtst6 libnss3 libxss1 ca-certificates xz-utils wget && \
-    rm -rf /var/lib/apt/lists/*
+    xz-utils wget
 
-# Copy the SDRconnect installer .run file to /opt // #change file name based on latest download
 COPY SDRconnect*.run /opt/installer.run
 
-# Make the installer executable and extract SDRconnect files
-RUN chmod +x /opt/installer.run && \
-    /opt/installer.run --noexec --target /opt/sdr_unpacked && \
-    mkdir -p /opt/sdrconnect && \
-    mv /opt/sdr_unpacked/* /opt/sdrconnect && \
-    rm -rf /opt/sdr_unpacked /opt/installer.run
+RUN /opt/installer.run --noexec --target /opt/sdr_unpacked && \
+    rm /opt/installer.run
 
-# Make the SDRconnect executable runnable
-RUN chmod +x /opt/sdrconnect/SDRconnect
+# Stage 2: Minimal runtime image
+FROM debian:bookworm-slim
 
-# Create symbolic link for easy command line access
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    libusb-1.0-0 libasound2 libuuid1 libicu72 libglib2.0-0 libxcb1 libx11-6 libxext6 \
+    libxrender1 libxrandr2 libxfixes3 libxi6 libxtst6 libnss3 libxss1 ca-certificates && \
+    rm -rf /var/lib/apt/lists/*
+
+COPY --from=builder /opt/sdr_unpacked /opt/sdrconnect
+
 RUN ln -s /opt/sdrconnect/SDRconnect /usr/local/bin/sdrconnect
 
-# Set working directory
 WORKDIR /opt/sdrconnect
 
-# Default command to run SDRconnect in server mode
-CMD ["sdrconnect", "--server"]
+ENTRYPOINT ["sdrconnect", "--server"]
