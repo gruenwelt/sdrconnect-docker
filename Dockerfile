@@ -6,6 +6,7 @@ RUN apt-get update && apt-get install -y \
 
 COPY SDRconnect*.run /opt/installer.run
 
+RUN chmod +x /opt/installer.run
 RUN /opt/installer.run --noexec --target /opt/sdr_unpacked && \
     rm /opt/installer.run
 
