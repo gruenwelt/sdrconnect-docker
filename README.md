@@ -17,7 +17,7 @@ Tested to run on Orange Pi Zero 2W and RSP1a and remote connected from a Mac wit
 
 ## 🏗️ Build the Docker image
 ```bash
-docker build --ssh default -t sdrconnect-server .
+docker build -t sdrconnect-server .
 ```
 ---
 
