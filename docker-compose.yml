@@ -1,0 +1,12 @@
+services:
+  sdrconnect-server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: sdrconnect-server-container
+    restart: unless-stopped
+    ports:
+      - "50000:50000"  # SDRconnect server port
+    devices:
+      - "/dev/bus/usb:/dev/bus/usb"  # USB passthrough for SDR hardware
+    entrypoint: ["sdrconnect", "--server"]
