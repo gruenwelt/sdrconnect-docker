@@ -1,39 +1,50 @@
 # sdrconnect-server-docker
 
-A Docker container that runs **SDRConnect** from SDRPlay.
+A Dockerized build and runtime environment for **SDRConnect** from SDRPlay.
 
-Tested to run on Orange Pi Zero 2W and RSP1a and remote connected from a Mac with SDRconnect installed. Should be able to run on other arm64 single-board computers like Raspberry Pi or other linux computers.
+This setup runs efficiently even on compact ARM64 single-board computers such as the Raspberry Pi, ensuring broader accessibility and ease of use for common DIY and SDR projects. Thanks to Docker-based isolation, it is also portable and can be deployed on a broad range of systems, including desktops and standard Linux servers.
 
 ---
 
-## 📦 Prerequisites
+## 📌 Version
+
+**v1.0.0** — Initial release with Docker  
+**Tested on**: Orange Pi Zero 2W (4GB RAM) and Banana Pi W4 Zero (2GB RAM) + SDRplay RSP1A; and connected from client software SDRconnect
+
+---
+
+## 📦 Requirements
 
 - A Linux system
-- A SDRPlay device such as RSP1a
-- Another device such as Mac or PC with a SDRconnect software installed for remote connection.
-- The sdrconnect installer file `sdrconnect*.run` downloaded from https://sdrplay.com/download and placed in the same folder as the Dockerfile
+- SDRplay hardware (e.g., RSP1A)
+- Client software SDRconnect
+- SDRconnect installer for Linux  
+  👉 Downloaded from [SDRplay.com](https://www.sdrplay.com/downloads/)
 
 ---
 
-## 🏗️ Build the Docker image
-```bash
-docker build -t sdrconnect-server .
-```
----
+## 🏗️ Build Instructions
 
-## 🚀 Run the container
-```bash
-docker run -d \
-  --name sdrconnect-server-container \
-  --device /dev/bus/usb \
-  -p 50000:50000 \
-  --restart unless-stopped \
-  sdrconnect-server
-```
+1. Clone this repository:
+
+   ```bash
+   git clone https://github.com/gruenwelt/sdrconnect-server-docker
+   cd sdrconnect-server-docker
+   ```
+
+2. Download the `SDRconnect*.run` file and place it in the root of this repo.
+
+3. Build and run the container:
+
+   ```bash
+   docker compose up -d
+   ```
 
 ---
 
 ## 👉 Notes
 
-- You must manually download and provide the `sdrconnect*.run` file.
-- The container exposes port 50000 for remote connection from SDRconnect on your other devices such as Mac or PC.
+- Port `50000` must be open and mapped for clients to connect.
+- Docker build skips the interactive menu in the `SDRconnect*.run` file which also displays the licence terms of using that software. Please install the software once manually to read the licence as the build script auto-accepts it on your behalf.
+
+---
